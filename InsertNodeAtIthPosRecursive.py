@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan 14 22:17:18 2025
-
-@author: Acer
-"""
-
 class Node:
     def __init__(self,data):
         self.data=data
@@ -117,27 +110,41 @@ def deleteNodeAtIthPosition(head,pos):
     printLL(head)
     return head
 
-    
-def InsertNodeAtIthPosRecursive(node,head,i):
+def InsertNodeAtIthPosRecursive(node, head, i):
     if head is None:
-        nide=head
-        return node
-        return node
-    if i<0 or i>lengthLL(head)+1:
-        return head
-    if i==0:
         node.next = head
         return node
-    
-    smallhead = InsertNodeAtIthPosRecursive(node,head.next,i-1)
-    head.next=smallhead
+    if i < 0 or i > lengthLL(head) + 1:
+        return head
+    if i == 0:
+        node.next = head
+        return node
+
+    smallhead = InsertNodeAtIthPosRecursive(node, head.next, i - 1)
+    head.next = smallhead
     return head
+
+def deleteNodeAtIthPositionRec(head, i):
+    if head is None:
+        return head
+    if i < 0 or i > lengthLL(head) + 1:
+        return head
+    if i == 0:
+        node = head
+        head = head.next
+        node.next = None
+        return head
+
+    smallhead = deleteNodeAtIthPositionRec(head.next, i - 1)
+    head.next = smallhead
+    return head
+
         
 
 pos=3
 head = takeinputoptimized()
-node=Node(10000)
-head = InsertNodeAtIthPosRecursive(node,head,pos)
+#node=Node(10000)
+head = deleteNodeAtIthPositionRec(head,pos)
 printLL(head)
 # x = InsertNodeAtIthPosition(node,head,pos)
 # if x==-1:
